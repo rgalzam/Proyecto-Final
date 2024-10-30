@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ProyectoFinal</string>
+    <string-array name="dropdown_options">
+        <item>Selecciona tipo de cuenta</item>
+        <item>Cuenta personal</item>
+        <item>Cuenta empresarial</item>
+    </string-array>
+</resources>
