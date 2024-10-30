@@ -65,6 +65,16 @@
             android:inputType="textPassword"
             android:padding="12dp" />
 
+        <EditText
+            android:id="@+id/confirmPWEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Confirmar Contraseña"
+            android:inputType="textPassword"
+            android:padding="12dp"
+            android:textColorHint="#737373" />
+
         <Button
             android:id="@+id/createBtn"
             android:layout_width="match_parent"

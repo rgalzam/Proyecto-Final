@@ -30,6 +30,7 @@ public class MainActivity2 extends AppCompatActivity {
     Spinner typeAccount;
     EditText mailEditText;
     EditText pwEditText;
+    EditText confirmPWEditText;
     Button createBtn;
 
     private TextView logInTextView;
@@ -48,6 +49,7 @@ public class MainActivity2 extends AppCompatActivity {
         typeAccount = findViewById(R.id.typeAccount);
         mailEditText = findViewById(R.id.mailEditText);
         pwEditText = findViewById(R.id.pwEditText);
+        confirmPWEditText = findViewById(R.id.confirmPWEditText);
         createBtn = findViewById(R.id.createBtn);
 
         //Array para el spinner de opciones
@@ -64,14 +66,21 @@ public class MainActivity2 extends AppCompatActivity {
                 String typeAcc = typeAccount.getSelectedItem().toString();
                 String email = mailEditText.getText().toString();
                 String pass = pwEditText.getText().toString();
+                String confirmPass = confirmPWEditText.getText().toString();
 
                 if(email.isEmpty()){
-                    mailEditText.setText("Favor de llenar los datos");
+                    Toast.makeText(MainActivity2.this, "Favor de introducir correo", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 if(pass.isEmpty()){
-                    pwEditText.setText("Favor de llenar los datos");
+                    Toast.makeText(MainActivity2.this, "Favor de introducir contraseña", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(!pass.equals(confirmPass)){
+                    Toast.makeText(MainActivity2.this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
+                    return;
                 }
 
                 addCredentialsToDB(email, pass);
@@ -104,6 +113,7 @@ public class MainActivity2 extends AppCompatActivity {
                 Toast.makeText(MainActivity2.this, "Cuenta creada", Toast.LENGTH_SHORT).show();
                 mailEditText.getText().clear();
                 pwEditText.getText().clear();
+                confirmPWEditText.getText().clear();
             }
         });
     }
