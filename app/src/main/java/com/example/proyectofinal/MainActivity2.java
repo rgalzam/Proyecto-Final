@@ -68,13 +68,18 @@ public class MainActivity2 extends AppCompatActivity {
                 String pass = pwEditText.getText().toString();
                 String confirmPass = confirmPWEditText.getText().toString();
 
+                if(typeAcc.equals("Selecciona tipo de cuenta")){
+                    Toast.makeText(MainActivity2.this, "Por favor seleccione un tipo de cuenta", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 if(email.isEmpty()){
-                    Toast.makeText(MainActivity2.this, "Favor de introducir correo", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity2.this, "Por favor ingrese un correo válido", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 if(pass.isEmpty()){
-                    Toast.makeText(MainActivity2.this, "Favor de introducir contraseña", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity2.this, "Por favor ingrese contraseña", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -83,7 +88,7 @@ public class MainActivity2 extends AppCompatActivity {
                     return;
                 }
 
-                addCredentialsToDB(email, pass);
+                addCredentialsToDB(typeAcc, email, pass);
             }
         });
 
@@ -96,8 +101,10 @@ public class MainActivity2 extends AppCompatActivity {
     }
 
     //Se agregan a la base de datos
-    public void addCredentialsToDB(String email, String pass){
+    public void addCredentialsToDB(String typeAcc, String email, String pass){
         HashMap<String, Object> textHashMap = new HashMap<>();
+
+        textHashMap.put("typeAcc", typeAcc);
         textHashMap.put("mail", email);
         textHashMap.put("password", pass);
 
@@ -105,12 +112,13 @@ public class MainActivity2 extends AppCompatActivity {
         DatabaseReference credentialsRef = database.getReference("credentials");
 
         String key = credentialsRef.push().getKey();
-        textHashMap.put("credentials", key);
+        textHashMap.put("key", key);
 
         credentialsRef.child(key).setValue(textHashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 Toast.makeText(MainActivity2.this, "Cuenta creada", Toast.LENGTH_SHORT).show();
+                typeAccount.setSelection(0);
                 mailEditText.getText().clear();
                 pwEditText.getText().clear();
                 confirmPWEditText.getText().clear();

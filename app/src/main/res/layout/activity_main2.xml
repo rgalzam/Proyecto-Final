@@ -42,7 +42,7 @@
         <Spinner
             android:id="@+id/typeAccount"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="61dp"
             android:layout_marginTop="16dp" />
 
         <EditText
@@ -50,6 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
+            android:textColor="@color/black"
             android:hint="Correo"
             android:textColorHint="#737373"
             android:inputType="text"
@@ -60,6 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:textColor="@color/black"
             android:hint="Contraseña"
             android:textColorHint="#737373"
             android:inputType="textPassword"
@@ -70,6 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:textColor="@color/black"
             android:hint="Confirmar Contraseña"
             android:inputType="textPassword"
             android:padding="12dp"
