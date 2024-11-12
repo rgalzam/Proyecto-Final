@@ -14,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class MainActivity extends AppCompatActivity {
 
     private Button createAccBtn;
+    private Button loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +28,15 @@ public class MainActivity extends AppCompatActivity {
         });
 
         createAccBtn=findViewById(R.id.createAccBtn);
+        loginButton = findViewById(R.id.loginButton);
+
         createAccBtn.setOnClickListener(view ->{
             Intent myIntent = new Intent(MainActivity.this, MainActivity2.class);
+            startActivity(myIntent);
+        });
+
+        loginButton.setOnClickListener(view ->{
+            Intent myIntent = new Intent(MainActivity.this, MainActivity3.class);
             startActivity(myIntent);
         });
     }
