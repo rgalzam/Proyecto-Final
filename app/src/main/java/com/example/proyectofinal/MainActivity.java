@@ -2,6 +2,7 @@ package com.example.proyectofinal;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -12,7 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView createTxt;
+    private Button createAccBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        createTxt=findViewById(R.id.createTxt);
-        createTxt.setOnClickListener(view ->{
+        createAccBtn=findViewById(R.id.createAccBtn);
+        createAccBtn.setOnClickListener(view ->{
             Intent myIntent = new Intent(MainActivity.this, MainActivity2.class);
             startActivity(myIntent);
         });

@@ -33,7 +33,7 @@ public class MainActivity2 extends AppCompatActivity {
     EditText confirmPWEditText;
     Button createBtn;
 
-    private TextView logInTextView;
+    private Button logInBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,8 +93,8 @@ public class MainActivity2 extends AppCompatActivity {
         });
 
         //Transición, regresa a inicio de sesión
-        logInTextView=findViewById(R.id.logInTextView);
-        logInTextView.setOnClickListener(view ->{
+        logInBtn=findViewById(R.id.logInBtn);
+        logInBtn.setOnClickListener(view ->{
             Intent myIntent = new Intent(MainActivity2.this, MainActivity.class);
             startActivity(myIntent);
         });

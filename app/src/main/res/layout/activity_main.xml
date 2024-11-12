@@ -76,7 +76,7 @@
         android:textSize="14sp" />
 
     <Button
-        android:id="@+id/createTxt"
+        android:id="@+id/createAccBtn"
         android:layout_width="367dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
