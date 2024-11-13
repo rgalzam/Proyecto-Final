@@ -14,9 +14,16 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.constants.ScaleTypes;
+import com.denzcoskun.imageslider.models.SlideModel;
+
+import java.util.ArrayList;
+
 public class MainActivity3 extends AppCompatActivity {
 
     DrawerLayout drawerLayer;
+    ImageSlider imageSlider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +32,16 @@ public class MainActivity3 extends AppCompatActivity {
         setContentView(R.layout.activity_main3);
 
         drawerLayer=findViewById(R.id.drawerLayer);
+        imageSlider=findViewById(R.id.imageSlider);
+
+        ArrayList<SlideModel> slideModels = new ArrayList<>();
+
+        slideModels.add(new SlideModel(R.drawable.imgsc1, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.imgsc2, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.imgsc3, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.imgsc4, ScaleTypes.FIT));
+
+        imageSlider.setImageList(slideModels,ScaleTypes.FIT);
     }
 
     public void ClickMenu(View view) {openDrawer(drawerLayer);}

@@ -14,7 +14,7 @@
         android:src="@drawable/baseline_person_24" />
 
     <TextView
-        android:layout_width="287dp"
+        android:layout_width="271dp"
         android:layout_height="64dp"
         android:paddingTop="50px"
         android:text="Inicio"
