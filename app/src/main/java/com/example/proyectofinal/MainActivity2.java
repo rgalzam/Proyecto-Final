@@ -16,6 +16,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -27,11 +30,14 @@ import java.util.Objects;
 
 public class MainActivity2 extends AppCompatActivity {
 
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
     Spinner typeAccount;
     EditText mailEditText;
     EditText pwEditText;
     EditText confirmPWEditText;
     Button createBtn;
+
 
     private Button logInBtn;
 
@@ -59,7 +65,7 @@ public class MainActivity2 extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         typeAccount.setAdapter(adapter);
 
-        // Acciones al botón de crear cuenta
+        // Validaciones al botón de crear cuenta
         createBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,7 +94,9 @@ public class MainActivity2 extends AppCompatActivity {
                     return;
                 }
 
-                addCredentialsToDB(typeAcc, email, pass);
+                registrarUsuario(email, pass);
+                addCredentialsToDB(typeAcc);
+
             }
         });
 
@@ -100,13 +108,26 @@ public class MainActivity2 extends AppCompatActivity {
         });
     }
 
-    //Se agregan a la base de datos
-    public void addCredentialsToDB(String typeAcc, String email, String pass){
+    //Se agregan a la base de datos de autenticación
+    private void registrarUsuario(String email, String password) {
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Registro exitoso, el usuario está ahora autenticado
+                        Toast.makeText(this, "Usuario registrado con éxito", Toast.LENGTH_SHORT).show();
+                    }
+                    typeAccount.setSelection(0);
+                    mailEditText.getText().clear();
+                    pwEditText.getText().clear();
+                    confirmPWEditText.getText().clear();
+                });
+    }
+
+    // El tipo de cuenta se agrega a realtime database
+    public void addCredentialsToDB(String typeAcc){
         HashMap<String, Object> textHashMap = new HashMap<>();
 
         textHashMap.put("typeAcc", typeAcc);
-        textHashMap.put("mail", email);
-        textHashMap.put("password", pass);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference credentialsRef = database.getReference("credentials");
@@ -117,11 +138,6 @@ public class MainActivity2 extends AppCompatActivity {
         credentialsRef.child(key).setValue(textHashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                Toast.makeText(MainActivity2.this, "Cuenta creada", Toast.LENGTH_SHORT).show();
-                typeAccount.setSelection(0);
-                mailEditText.getText().clear();
-                pwEditText.getText().clear();
-                confirmPWEditText.getText().clear();
             }
         });
     }
