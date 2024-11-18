@@ -94,8 +94,7 @@ public class MainActivity2 extends AppCompatActivity {
                     return;
                 }
 
-                registrarUsuario(email, pass);
-                addCredentialsToDB(typeAcc);
+                registrarUsuario(email, pass, typeAcc);
 
             }
         });
@@ -109,12 +108,15 @@ public class MainActivity2 extends AppCompatActivity {
     }
 
     //Se agregan a la base de datos de autenticación
-    private void registrarUsuario(String email, String password) {
+    private void registrarUsuario(String email, String password, String typeAcc) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         // Registro exitoso, el usuario está ahora autenticado
+                        addCredentialsToDB(typeAcc);
                         Toast.makeText(this, "Usuario registrado con éxito", Toast.LENGTH_SHORT).show();
+                    } else{
+                        Toast.makeText(this, "Error al registrar usuario, intente de nuevo", Toast.LENGTH_SHORT).show();
                     }
                     typeAccount.setSelection(0);
                     mailEditText.getText().clear();
