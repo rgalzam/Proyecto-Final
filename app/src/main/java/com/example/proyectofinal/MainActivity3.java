@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -35,7 +36,8 @@ public class MainActivity3 extends AppCompatActivity {
 
     BiometricPrompt biometricPrompt;
     BiometricPrompt.PromptInfo promptInfo;
-    View mLayout;
+
+    TextView orgNameTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class MainActivity3 extends AppCompatActivity {
 
         drawerLayer=findViewById(R.id.drawerLayer);
         imageSlider=findViewById(R.id.imageSlider);
+        orgNameTV=findViewById(R.id.orgNameTV);
 
         ArrayList<SlideModel> slideModels = new ArrayList<>();
 
@@ -54,6 +57,8 @@ public class MainActivity3 extends AppCompatActivity {
         slideModels.add(new SlideModel(R.drawable.imgsc4, ScaleTypes.FIT));
 
         imageSlider.setImageList(slideModels,ScaleTypes.FIT);
+
+        UserRetrieve.fetchAndDisplayUsername(this, orgNameTV);
     }
 
     public void ClickMenu(View view) {openDrawer(drawerLayer);}
@@ -141,7 +146,7 @@ public class MainActivity3 extends AppCompatActivity {
         builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Intent myIntent = new Intent(MainActivity3.this, PersonalData.class);
+                Intent myIntent = new Intent(MainActivity3.this, MainActivity.class);
                 startActivity(myIntent);
             }
         });

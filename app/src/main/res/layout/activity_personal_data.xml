@@ -58,16 +58,16 @@
             android:scaleType="centerCrop"/>
 
         <TextView
-            android:id="@+id/company_name"
+            android:id="@+id/orgNameTV2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Nombre de Empresa"
+            android:text="Empresa"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/email"
+            android:id="@+id/emailTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -76,10 +76,11 @@
 
 
         <TextView
+            android:id="@+id/typeAccTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Contraseña: olaola"
+            android:text="Tipo de cuenta: Cuenta empresarial"
             android:textSize="16sp" />
 
 
