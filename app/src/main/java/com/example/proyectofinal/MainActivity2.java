@@ -116,7 +116,7 @@ public class MainActivity2 extends AppCompatActivity {
                         addCredentialsToDB(typeAcc);
                         Toast.makeText(this, "Usuario registrado con éxito", Toast.LENGTH_SHORT).show();
                     } else{
-                        Toast.makeText(this, "Error al registrar usuario, intente de nuevo", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Error "+ task.getException().getMessage(), Toast.LENGTH_LONG).show();
                     }
                     typeAccount.setSelection(0);
                     mailEditText.getText().clear();
