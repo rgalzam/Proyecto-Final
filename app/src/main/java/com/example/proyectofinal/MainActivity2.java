@@ -93,9 +93,7 @@ public class MainActivity2 extends AppCompatActivity {
                     Toast.makeText(MainActivity2.this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
                 registrarUsuario(email, pass, typeAcc);
-
             }
         });
 
@@ -113,8 +111,14 @@ public class MainActivity2 extends AppCompatActivity {
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         // Registro exitoso, el usuario está ahora autenticado
-                        addCredentialsToDB(typeAcc);
+                        //addCredentialsToDB(typeAcc);
                         Toast.makeText(this, "Usuario registrado con éxito", Toast.LENGTH_SHORT).show();
+
+
+                        Intent myIntent = new Intent(MainActivity2.this, UsernameActivity.class);
+                        myIntent.putExtra("typeAcc", typeAcc);
+                        startActivity(myIntent);
+
                     } else{
                         Toast.makeText(this, "Error "+ task.getException().getMessage(), Toast.LENGTH_LONG).show();
                     }
@@ -126,10 +130,11 @@ public class MainActivity2 extends AppCompatActivity {
     }
 
     // El tipo de cuenta se agrega a realtime database
-    public void addCredentialsToDB(String typeAcc){
+    public void addCredentialsToDB(String typeAcc, String username){
         HashMap<String, Object> textHashMap = new HashMap<>();
 
         textHashMap.put("typeAcc", typeAcc);
+        textHashMap.put("username", username);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference credentialsRef = database.getReference("credentials");

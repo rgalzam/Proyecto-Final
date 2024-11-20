@@ -38,6 +38,11 @@ public class Account extends AppCompatActivity implements OnMapReadyCallback, Go
         mapFragment.getMapAsync(this);
     }
 
+    public void Back(View view){
+        Intent myIntent = new Intent(Account.this, MainActivity3.class);
+        startActivity(myIntent);
+    }
+
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         map=googleMap;
