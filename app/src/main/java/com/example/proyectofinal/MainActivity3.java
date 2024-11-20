@@ -122,7 +122,7 @@ public class MainActivity3 extends AppCompatActivity {
         });
 
         promptInfo = new BiometricPrompt.PromptInfo.Builder()
-                .setTitle("Titulo de la respuesta")
+                .setTitle("Visualizar Datos Personales")
                 .setDescription("Usar huella para entrar")
                 .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_STRONG | BiometricManager.Authenticators.DEVICE_CREDENTIAL)
                 .build();

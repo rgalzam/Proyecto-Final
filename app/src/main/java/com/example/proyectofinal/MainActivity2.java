@@ -131,21 +131,28 @@ public class MainActivity2 extends AppCompatActivity {
 
     // El tipo de cuenta se agrega a realtime database
     public void addCredentialsToDB(String typeAcc, String username){
-        HashMap<String, Object> textHashMap = new HashMap<>();
 
-        textHashMap.put("typeAcc", typeAcc);
-        textHashMap.put("username", username);
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = auth.getCurrentUser();
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference credentialsRef = database.getReference("credentials");
+        if (currentUser != null) {
+            String uid = currentUser.getUid();
 
-        String key = credentialsRef.push().getKey();
-        textHashMap.put("key", key);
+            HashMap<String, Object> userMap = new HashMap<>();
+            userMap.put("typeAcc", typeAcc);
+            userMap.put("username", username);
 
-        credentialsRef.child(key).setValue(textHashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-            }
-        });
+            //FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference credentialsRef = FirebaseDatabase.getInstance().getReference("credentials");
+
+            //String key = credentialsRef.push().getKey();
+            userMap.put("key", uid);
+
+            credentialsRef.child(uid).setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                }
+            });
+        }
     }
 }
